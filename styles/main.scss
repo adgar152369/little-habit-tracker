@@ -1,8 +1,9 @@
 @import '_settings';
+@import 'dashboard';
 
 * {
-  margin: 0;
-  padding: 0;
+  // margin: 0;
+  // padding: 0;
   box-sizing: border-box;
 }
 
@@ -11,10 +12,124 @@ html {
 }
 
 body {
-  color: $primary-white;
+  color: $text-gray;
   font-family: $body-font;
+  // padding: $space-1 $space-2;
+  margin: 0;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: $heading-font;
+  color: $primary-white;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+// buttons
+.primary-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(180deg, $primary-teal, $teal-300);
+  border-radius: 10px;
+  width: 215px;
+  height: 62px;
+  border: none;
+  color: $primary-white;
+  padding: $space-1;
+  font-weight: bold;
+  font-size: $text-4;
+  width: 100%;
+  max-width: 231px;
+}
+
+.basic-btn {
+  background: none;
+  color: $primary-white;
+  cursor: pointer;
+  font-size: $text-1;
+  display: block;
+
+  &.login {
+    color: $primary-coral;
+    cursor: default;
+    a {
+      cursor: pointer;
+      color: $primary-white;
+      pointer-events: none;
+    }
+  }
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.landing {
+  max-width: 75%;
+  margin: 0 auto;
+  min-height: 100dvh;
+
+  &-header {
+    font-size: $heading-2;
+  }
+
+  &-description {
+    font-size: $text-2;
+    line-height: 25px;
+  }
+
+  &-nextBtns {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+    align-items: center;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+// Calendar
+.calendar-container {
+  width: min(100%, 320px);
+  #calendar-year {
+    text-align: center;
+    margin-bottom: $space-1;
+  }
+  #calendar {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr)); /* 7 columns, flexible but with min width 0 */
+    grid-gap: 5px; /* Adjust gap as needed */
+  
+    .day {
+      /* Style for individual day cells */
+      padding: 10px;
+      border: 1px solid $charcoal;
+      text-align: center;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 1.875rem;
+      width: 1.875rem;
+    }
+    .current {
+      border: solid 3px $teal-100;
+    }
+  }
 }

@@ -1,6 +1,4 @@
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -9,12 +7,117 @@ html {
 }
 
 body {
-  color: #F0FAFA;
+  color: #B6C0C3;
   font-family: "Inter", sans-serif;
+  margin: 0;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: "JetBrains Mono", monospace;
+  color: #F0FAFA;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+.primary-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(180deg, #008080, #016C6C);
+  border-radius: 10px;
+  width: 215px;
+  height: 62px;
+  border: none;
+  color: #F0FAFA;
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+  width: 100%;
+  max-width: 231px;
+}
+
+.basic-btn {
+  background: none;
+  color: #F0FAFA;
+  cursor: pointer;
+  font-size: 0.75rem;
+  display: block;
+}
+.basic-btn.login {
+  color: #F88379;
+  cursor: default;
+}
+.basic-btn.login a {
+  cursor: pointer;
+  color: #F0FAFA;
+  pointer-events: none;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.landing {
+  max-width: 75%;
+  margin: 0 auto;
+  min-height: 100dvh;
+}
+.landing-header {
+  font-size: 1.75rem;
+}
+.landing-description {
+  font-size: 1rem;
+  line-height: 25px;
+}
+.landing-nextBtns {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+.landing img {
+  width: 100%;
+}
+
+.calendar-container {
+  width: min(100%, 320px);
+}
+.calendar-container #calendar-year {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.calendar-container #calendar {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr)); /* 7 columns, flexible but with min width 0 */
+  grid-gap: 5px; /* Adjust gap as needed */
+}
+.calendar-container #calendar .day {
+  /* Style for individual day cells */
+  padding: 10px;
+  border: 1px solid #36454F;
+  text-align: center;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.875rem;
+  width: 1.875rem;
+}
+.calendar-container #calendar .current {
+  border: solid 3px #00AFB9;
 }
 
 /*# sourceMappingURL=main.css.map */
