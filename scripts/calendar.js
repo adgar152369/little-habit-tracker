@@ -1,3 +1,13 @@
+import Habit from "./Habit.js";
+
+// example data structure for habits
+const habits = {
+  habit1: new Habit("Arts & Crafts", "Come up with new ideas each week with the kids.", true, false),
+  habit2: new Habit("Drink less coffee", "Try to drink only cup of coffee per day", false, false),
+}
+
+console.log(habits);
+
 // Get the calendar container
 const calendar = document.getElementById('calendar');
 const calendarYear = document.getElementById('calendar-year');
@@ -12,7 +22,6 @@ const currentMonth = today.getMonth() + 1;
 const currentYear = today.getFullYear();
 const currentDay = today.getDate();
 
-// Function to generate calendar days for a month/year
 function generateCalendar(month, year) {
   calendar.innerHTML = ''; // Clear existing calendar
 
@@ -29,19 +38,15 @@ function generateCalendar(month, year) {
   for (let day = 1; day <= daysInMonth; day++) {
     const cell = document.createElement('div');
     cell.classList.add('day');
-    // cell.textContent = day;
 
-    // Highlight current day, weekend, etc.
+    // Highlight current day
     if (
-      day === today.getDate() &&  // Compare to today's date
+      day === today.getDate() &&
       month === today.getMonth() + 1 &&
       year === today.getFullYear()
     ) {
-      cell.classList.add('current'); // Add a class for styling
+      cell.classList.add('current');
     }
-
-    // Add event listeners for habit tracking (click, hover)
-    // ... (Add logic to mark habits as completed, display streaks)
 
     calendar.appendChild(cell);
   }
