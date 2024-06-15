@@ -9,3 +9,12 @@
 html {
   background-color: $primary-black;
 }
+
+body {
+  color: $primary-white;
+  font-family: $body-font;
+}
+
+h1, h2, h3 {
+  font-family: $heading-font;
+}

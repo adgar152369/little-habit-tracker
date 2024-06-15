@@ -8,4 +8,13 @@ html {
   background-color: #111111;
 }
 
+body {
+  color: #F0FAFA;
+  font-family: "Inter", sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: "JetBrains Mono", monospace;
+}
+
 /*# sourceMappingURL=main.css.map */
