@@ -11,5 +11,8 @@
   "description": "",
   "dependencies": {
     "chart.js": "^4.4.3"
+  },
+  "devDependencies": {
+    "sass": "^1.77.5"
   }
 }
