@@ -1,3 +1,38 @@
+.dashboard-container {
+  padding: 1.5rem 1rem;
+}
+
+.calendar-container {
+  width: min(100%, 320px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.calendar-container #calendar-year {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.calendar-container #calendar {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-gap: 1rem;
+}
+.calendar-container #calendar .day {
+  padding: 10px;
+  border: 1px solid #36454F;
+  text-align: center;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.875rem;
+  width: 1.875rem;
+}
+.calendar-container #calendar .current {
+  border: solid 3px #00AFB9;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -90,34 +125,6 @@ button {
 }
 .landing img {
   width: 100%;
-}
-
-.calendar-container {
-  width: min(100%, 320px);
-}
-.calendar-container #calendar-year {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-.calendar-container #calendar {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr)); /* 7 columns, flexible but with min width 0 */
-  grid-gap: 5px; /* Adjust gap as needed */
-}
-.calendar-container #calendar .day {
-  /* Style for individual day cells */
-  padding: 10px;
-  border: 1px solid #36454F;
-  text-align: center;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 1.875rem;
-  width: 1.875rem;
-}
-.calendar-container #calendar .current {
-  border: solid 3px #00AFB9;
 }
 
 /*# sourceMappingURL=main.css.map */

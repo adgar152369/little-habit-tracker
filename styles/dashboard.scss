@@ -1,0 +1,39 @@
+// Dashboard
+.dashboard-container {
+  padding: $space-2 $space-1;
+}
+// Calendar
+.calendar-container {
+  width: min(100%, 320px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  #calendar-year {
+    text-align: center;
+    margin-bottom: $space-1;
+  }
+
+  #calendar {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-gap: $space-1;
+
+    .day {
+      padding: 10px;
+      border: 1px solid $charcoal;
+      text-align: center;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 1.875rem;
+      width: 1.875rem;
+    }
+
+    .current {
+      border: solid 3px $teal-100;
+    }
+  }
+}

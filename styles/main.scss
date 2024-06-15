@@ -103,33 +103,3 @@ button {
     width: 100%;
   }
 }
-
-// Calendar
-.calendar-container {
-  width: min(100%, 320px);
-  #calendar-year {
-    text-align: center;
-    margin-bottom: $space-1;
-  }
-  #calendar {
-    display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr)); /* 7 columns, flexible but with min width 0 */
-    grid-gap: 5px; /* Adjust gap as needed */
-  
-    .day {
-      /* Style for individual day cells */
-      padding: 10px;
-      border: 1px solid $charcoal;
-      text-align: center;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 1.875rem;
-      width: 1.875rem;
-    }
-    .current {
-      border: solid 3px $teal-100;
-    }
-  }
-}
