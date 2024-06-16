@@ -2,6 +2,7 @@
 .dashboard-container {
   padding: $space-2 $space-1;
 }
+
 // Calendar
 .calendar-container {
   width: min(100%, 320px);
@@ -30,6 +31,11 @@
       align-items: center;
       height: 1.875rem;
       width: 1.875rem;
+
+      &.completed {
+        background-color: $teal-100;
+        box-shadow: 0 0 10px $teal-100;
+      }
     }
 
     .current {

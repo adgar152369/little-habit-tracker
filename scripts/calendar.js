@@ -1,12 +1,16 @@
 import Habit from "./Habit.js";
 
 // example data structure for habits
-const habits = {
-  habit1: new Habit("Arts & Crafts", "Come up with new ideas each week with the kids.", true, false),
-  habit2: new Habit("Drink less coffee", "Try to drink only cup of coffee per day", false, false),
-}
+export const habits = [
+  {
+    habit: new Habit("Arts & Crafts", "Come up with new ideas each week with the kids.",true,false)
+  },
+  {
+    habit: new Habit("Drink less coffee", "Drink one cup coffee per day.",false,false)
+  },
+]
 
-console.log(habits);
+// console.log(habits);
 
 // Get the calendar container
 const calendar = document.getElementById('calendar');
@@ -39,7 +43,7 @@ function generateCalendar(month, year) {
     const cell = document.createElement('div');
     cell.classList.add('day');
 
-    // Highlight current day
+    // Highlight current day 
     if (
       day === today.getDate() &&
       month === today.getMonth() + 1 &&
