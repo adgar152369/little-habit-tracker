@@ -1,17 +1,3 @@
-import Habit from "./Habit.js";
-
-// example data structure for habits
-export const habits = [
-  {
-    habit: new Habit("Arts & Crafts", "Come up with new ideas each week with the kids.",true,false)
-  },
-  {
-    habit: new Habit("Drink less coffee", "Drink one cup coffee per day.",false,false)
-  },
-]
-
-// console.log(habits);
-
 // Get the calendar container
 const calendar = document.getElementById('calendar');
 const calendarYear = document.getElementById('calendar-year');
@@ -24,7 +10,7 @@ const monthNames = [
 const today = new Date();
 const currentMonth = today.getMonth() + 1;
 const currentYear = today.getFullYear();
-const currentDay = today.getDate();
+const currentDay = today.getDate() + 1;
 
 function generateCalendar(month, year) {
   calendar.innerHTML = ''; // Clear existing calendar
@@ -45,7 +31,7 @@ function generateCalendar(month, year) {
 
     // Highlight current day 
     if (
-      day === today.getDate() &&
+      day === today.getDate() + 1 &&
       month === today.getMonth() + 1 &&
       year === today.getFullYear()
     ) {

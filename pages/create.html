@@ -10,34 +10,36 @@
   <link rel="stylesheet" href="/public/main.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="module" src="/scripts/calendar.js" defer></script>
   <script type="module" src="/scripts/dashboard.js" defer></script>
-  <title>Dashboard</title>
+  <title>Create New Habit</title>
 </head>
 
 <body>
   <header>
     <nav>
       <ul>
-        <li><a href="">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="">Profile</a></li>
-        <li><a href="create.html">Create</a></li>
+        <li><a href="#">Create</a></li>
       </ul>
     </nav>
   </header>
-  <div class="dashboard-container">
-    <h1>Dashboard</h1>
-    <div class="calendar-container">
-      <div id="calendar-year"></div>
-      <div id="calendar"></div>
-    </div>
-
-    <section class="habits" id="habits">
-
-    </section>
-  </div>
-
   
+  <h1>Create New Habit</h1>
+
+  <form class="new-habit-form">
+    <div class="new-habit">
+      <div class="new-habit__input new-habit__name">
+        <input type="text" name="habitName" max="50">
+        <label for="habitName">Habit Name</label>
+      </div>
+      <div class="new-habit__input new-habit__description">
+        <textarea name="habitDescription" id="habitDescription"></textarea>
+        <label for="habitDescription">Habit Description</label>
+      </div>
+    </div>
+    <button type="submit" class="primary-btn createHabitBtn">Create</button>
+  </form>
 </body>
 
 </html>

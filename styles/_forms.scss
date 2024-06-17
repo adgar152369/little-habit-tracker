@@ -1,0 +1,36 @@
+h1 {
+  text-align: center;
+}
+
+form {
+  // max-width: 50%;
+  padding: $space-2 $space-1;
+
+  input,
+  textarea {
+    border: none;
+    background: none;
+    border-bottom: solid 1px $primary-coral;
+    width: 100%;
+    padding-block: $space-1;
+    color: $primary-white;
+  }
+}
+
+.new-habit {
+
+  &__input {
+    position: relative;
+    padding-bottom: $space-1;
+    margin-block: $space-2;
+  }
+
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    font-size: $text-2;
+    color: $charcoal;
+  }
+}
