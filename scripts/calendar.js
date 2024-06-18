@@ -10,7 +10,7 @@ const monthNames = [
 const today = new Date();
 const currentMonth = today.getMonth() + 1;
 const currentYear = today.getFullYear();
-const currentDay = today.getDate() + 1;
+const currentDay = today.getDate();
 
 function generateCalendar(month, year) {
   calendar.innerHTML = ''; // Clear existing calendar
@@ -31,7 +31,7 @@ function generateCalendar(month, year) {
 
     // Highlight current day 
     if (
-      day === today.getDate() + 1 &&
+      day === today.getDate() &&
       month === today.getMonth() + 1 &&
       year === today.getFullYear()
     ) {
