@@ -19,14 +19,15 @@ body {
 }
 
 header {
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: $space-2 $space-1;
+  border-top: solid 1px $charcoal;
 }
 
 .nav-list {
@@ -36,6 +37,12 @@ header {
   // flex-direction: column;
   gap: 4rem;
   list-style: none;
+
+  a {
+    color: $charcoal;
+    font-size: $text-1;
+    font-weight: bold;
+  }
 }
 
 h1,

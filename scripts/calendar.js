@@ -1,8 +1,10 @@
 import Habit from "./Habit.js";
 
-// Get the calendar container
 const calendar = document.getElementById('calendar');
 const calendarYear = document.getElementById('calendar-year');
+const habitTitle = document.querySelector('.habit-title');
+const habitItemNames = document.querySelectorAll('.habit-name');
+
 const monthNames = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -18,6 +20,21 @@ const currentDay = today.getDate();
 
 function generateCalendar(month, year) {
   calendar.innerHTML = ''; // Clear existing calendar
+
+  // fill in habit title
+  console.log(Array.from(habitItemNames));
+  habitItemNames.forEach((habitName) => {
+    habitName.addEventListener('click', (e) => {
+      habitTitle.textContent = habitName.textContent;
+      e.preventDefault();
+      habitItemNames.forEach(habit => {
+        if (habit.classList.contains('active')) {
+          habit.classList.remove('active');
+        }
+      });
+      habitName.classList.add('active');
+    })
+  })
 
   // Get the first day of the month and the number of days in the month
   const firstDay = (new Date(year, month)).getDay();
@@ -61,7 +78,7 @@ if (habits.length > 0) {
     const habitCompletionBtn = document.querySelector('.habit-complete-btn');
     habitCompletionBtn.addEventListener('click', () => {
       habit.handleHabitCompletion(habit);
-      generateCalendar(currentMonth, currentYear);
+      generateCalendar(currentMonth, currentYear, habit.name);
     });
   })
 }

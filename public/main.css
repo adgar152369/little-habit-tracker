@@ -83,14 +83,15 @@ body {
 }
 
 header {
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
+  border-top: solid 1px #36454F;
 }
 
 .nav-list {
@@ -99,6 +100,11 @@ header {
   display: flex;
   gap: 4rem;
   list-style: none;
+}
+.nav-list a {
+  color: #36454F;
+  font-size: 0.75rem;
+  font-weight: bold;
 }
 
 h1,

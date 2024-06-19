@@ -56,6 +56,7 @@ export default class Habit {
     const habitLinkContainer = document.createElement('a');
     const habitBtn = document.createElement('button');
     habitBtn.classList.add('habit-complete-btn');
+    habitLinkContainer.classList.add('habit-name')
 
     habitBtn.textContent = `Complete`;
     habitLinkContainer.textContent = name;
