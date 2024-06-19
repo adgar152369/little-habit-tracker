@@ -7,10 +7,10 @@ const newHabitForm = document.querySelector('.new-habit-form');
 
 // Habit stuff
 if (newHabitForm) {
-  newHabitForm.addEventListener('submit', (e) => createHabit(e));
+  newHabitForm.addEventListener('submit', (e) => createHabitInstance(e));
 }
 
-function createHabit(e) {
+function createHabitInstance(e) {
   e.preventDefault();
   // get input values
   const habitName = habitNameInput.value.trim();
@@ -20,21 +20,23 @@ function createHabit(e) {
     alert('Please input a name.');
     return;
   }
-  // create new habits array
-  let newHabits = [];
-  newHabits.push(habitName, habitDescription);
   // Clear form fields (optional)
   habitNameInput.value = '';
   habitDescriptionInput.value = '';
 
   // create new Habit objects
-  newHabits.forEach((habit, i) => {
-    habit = new Habit(habitName, habitDescription);
-    habit.saveToLocalStorage();
-  });
+  const habit = new Habit(habitName, habitDescription, false, []);
+  habit.saveToLocalStorage();
 }
 
+// Load existing habits from localStorage
 if (window.location.pathname == "/pages/dashboard.html") {
   const habits = Habit.loadAllFromLocalStorage();
-  habits.forEach(habit => habit.createHabitElement(habit.name, habit.description, habit.isCompletedToday))
+  // list exisitng habits
+
+  // console.log(habits)
+  
+  habits.forEach(habit => {
+    habit.createHabitElement(habit.name)
+  })
 }

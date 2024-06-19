@@ -1,28 +1,16 @@
 export default class Habit {
   _completedDays = [];
   _missedDays = [];
-  _isCompletedToday = false;
   currentDay = new Date().getDate();
+  currentMonth = new Date().getMonth() + 1;
   static allHabits = [];
 
-  constructor(name, description, isAlarmSet = false) {
+  constructor(name, description, isAlarmSet = false, completedDays) {
     this._name = name;
     this._description = description;
     this.isAlarmSet = isAlarmSet;
+    this._completedDays = completedDays;
     Habit.allHabits.push(this);
-  }
-
-  createHabitElement(name, isCompleted) {
-    // Create habit element 
-    const habitsSection = document.querySelector('#habits');
-    const habitsList = document.createElement('ul');
-    const habitItem = document.createElement('li');
-    const habitBtn = document.createElement('button');
-    habitBtn.textContent = `Complete`;
-    habitItem.textContent = name;
-    habitItem.appendChild(habitBtn);
-    habitsList.append(habitItem);
-    habitsSection.appendChild(habitsList);
   }
 
   // Getters and Setters
@@ -44,7 +32,6 @@ export default class Habit {
 
   set completedDays(dates) {
     if (!Array.isArray(dates)) {
-      console.log(dates)
       this._completedDays.push(dates);
     }
     else {
@@ -60,32 +47,40 @@ export default class Habit {
     this._missedDays.push(value);
   }
 
-  /**
-   * @param {boolean} value
-   */
-  set isCompletedToday(value) {
-    this._isCompletedToday = value;
-    this.completedDays.push(this.currentDay);
-    // set isCompletedToday back to false
-    // this._isCompletedToday = false;
+
+  // Create habit element 
+  createHabitElement(name) {
+    const habitsSection = document.querySelector('#habits');
+    const habitsList = document.querySelector('.habits-list');
+    const habitItem = document.createElement('li');
+    const habitLinkContainer = document.createElement('a');
+    const habitBtn = document.createElement('button');
+    habitBtn.classList.add('habit-complete-btn');
+
+    habitBtn.textContent = `Complete`;
+    habitLinkContainer.textContent = name;
+    habitLinkContainer.href = "";
+    habitItem.classList.add('habit');
+    
+    habitItem.appendChild(habitLinkContainer);
+    habitItem.appendChild(habitBtn); 
+    habitsList.append(habitItem);
+    habitsSection.appendChild(habitsList);
+
   }
 
-  get isCompletedToday() {
-    return this._isCompletedToday;
-  }
-
-  editHabit(newName, newDesc, newIsAlarmSet) {
-    this.name = newName;
-    this.description = newDesc;
-    this.isAlarmSet = newIsAlarmSet;
-    this.isCompleted = newIsCompleted;
+  handleHabitCompletion() {
+    if (!this.completedDays.includes(this.currentDay)) {
+      console.log(this)
+      this.completedDays = this.currentDay;
+      this.saveToLocalStorage();
+    }
   }
 
   saveToLocalStorage() {
     const data = {
       completedDays: this.completedDays,
       missedDays: this.missedDays,
-      isCompletedToday: this._isCompletedToday,
       name: this.name,
       description: this.description,
       todaysDate: this.currentDay,
@@ -96,14 +91,14 @@ export default class Habit {
   static loadAllFromLocalStorage() {
     const keys = Object.keys(localStorage);
     const habits = [];
+    let isHabitCompleted = false;
+
     for (const key of keys) {
       const habit = JSON.parse(localStorage.getItem(key));
       habits.push(habit);
     }
 
     // Transform localStorage habits into Habit instances
-    habits.forEach((habit) => new Habit(habit.name, habit.description))
-
-    return Habit.allHabits;
+    return habits.map((habit) => new Habit(habit.name, habit.description, false, habit.completedDays));
   }
 }

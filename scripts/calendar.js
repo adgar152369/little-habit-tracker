@@ -1,10 +1,14 @@
+import Habit from "./Habit.js";
+
 // Get the calendar container
 const calendar = document.getElementById('calendar');
 const calendarYear = document.getElementById('calendar-year');
 const monthNames = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
-]
+];
+// Get habits
+const habits = Habit.allHabits;
 
 // Get the current date
 const today = new Date();
@@ -22,6 +26,7 @@ function generateCalendar(month, year) {
   // Create year element
   const yearEl = document.createElement('span');
   yearEl.textContent = `${monthNames[currentMonth - 1]} ${currentDay}, ${year}`;
+  calendarYear.innerHTML = '';
   calendarYear.appendChild(yearEl);
 
   // Create calendar cells for each day
@@ -29,21 +34,37 @@ function generateCalendar(month, year) {
     const cell = document.createElement('div');
     cell.classList.add('day');
 
-    // Highlight current day 
+    cell.textContent = day;
+
+    // Highlight current day, in the current month, in the current year
     if (
-      day === today.getDate() &&
-      month === today.getMonth() + 1 &&
-      year === today.getFullYear()
+      day === currentDay &&
+      month === currentMonth &&
+      year === currentYear
     ) {
       cell.classList.add('current');
+    }
+
+    for (let j = 0; j < habits.length; j++) {
+      if (habits[j].completedDays.includes(day)) {
+        cell.classList.add('completed')
+      }
     }
 
     calendar.appendChild(cell);
   }
 }
 
+// add completion event listener to habit
+if (habits.length > 0) {
+  habits.forEach((habit) => {
+    const habitCompletionBtn = document.querySelector('.habit-complete-btn');
+    habitCompletionBtn.addEventListener('click', () => {
+      habit.handleHabitCompletion(habit);
+      generateCalendar(currentMonth, currentYear);
+    });
+  })
+}
+
 // Initial calendar generation
 generateCalendar(currentMonth, currentYear);
-
-// Add buttons for navigation (previous/next month)
-// ... (Update month/year and regenerate the calendar)
