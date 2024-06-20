@@ -1,42 +1,55 @@
-import Habit from './Habit.js';
+import Habit from "./Habit.js";
 
-const habitNameInput = document.querySelector('input[name="habitName"]');
-const habitDescriptionInput = document.querySelector('textarea[name="habitDescription"]');
-const newHabitForm = document.querySelector('.new-habit-form');
+// Get habits
+const habits = Habit.loadAllFromLocalStorage();
+let selectedHabitName = null;
 
 
-// Habit stuff
-if (newHabitForm) {
-  newHabitForm.addEventListener('submit', (e) => createHabitInstance(e));
-}
+function generateHabitList() {
+  habits.forEach((habit, i) => {
+    habit.createHabitElement();
+  });
 
-function createHabitInstance(e) {
-  e.preventDefault();
-  // get input values
-  const habitName = habitNameInput.value.trim();
-  const habitDescription = habitDescriptionInput.value.trim();
-  // basic input validation
-  if (!habitName) {
-    alert('Please input a name.');
-    return;
+  const habitLinkBtns = document.querySelectorAll('.habit-link');
+  const habitCompleteBtns = document.querySelectorAll('.habit-complete-btn');
+
+  if (habitLinkBtns.length > 0) {
+    habitLinkBtns[0].classList.add('active');
+    selectedHabitName = habitLinkBtns[0].textContent;
+
+    habits.forEach((habit) => {
+      if (habit.name === selectedHabitName) {
+        habit.generateCalendar(habit.currentMonth, habit.currentYear, habit)
+      }
+    });
+
+    habitLinkBtns.forEach((link, i) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        selectedHabitName = null;
+        habitLinkBtns.forEach((item) => item.classList.remove('active'));
+        link.classList.add('active');
+        selectedHabitName = link.textContent;
+
+        if (habits[i].name === selectedHabitName) {
+          habits[i].generateCalendar(habits[i].currentMonth, habits[i].currentYear, habits[i]);
+        }
+      });
+    });
+
+    habitCompleteBtns.forEach((completeBtn, i) => {
+      completeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const habitName = completeBtn.getAttribute('data-habit-name');
+
+        if (habitName === habits[i].name) {
+          // habits[i].generateCalendar(habits[i].currentMonth, habits[i].currentYear, habits[i]);
+          habits[i].handleHabitCompletion();
+        }
+      });
+    });
   }
-  // Clear form fields (optional)
-  habitNameInput.value = '';
-  habitDescriptionInput.value = '';
 
-  // create new Habit objects
-  const habit = new Habit(habitName, habitDescription, false, []);
-  habit.saveToLocalStorage();
 }
 
-// Load existing habits from localStorage
-if (window.location.pathname == "/pages/dashboard.html") {
-  const habits = Habit.loadAllFromLocalStorage();
-  // list exisitng habits
-
-  // console.log(habits)
-  
-  habits.forEach(habit => {
-    habit.createHabitElement(habit.name)
-  })
-}
+generateHabitList();

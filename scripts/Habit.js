@@ -1,15 +1,24 @@
 export default class Habit {
-  _completedDays = [];
-  _missedDays = [];
   currentDay = new Date().getDate();
   currentMonth = new Date().getMonth() + 1;
+  currentYear = new Date().getFullYear();
   static allHabits = [];
 
-  constructor(name, description, isAlarmSet = false, completedDays) {
+  constructor
+    (
+      name,
+      description,
+      isCompletedToday = false,
+      isAlarmSet = false,
+      completedDays = [],
+      missedDays = []
+    ) {
     this._name = name;
     this._description = description;
-    this.isAlarmSet = isAlarmSet;
+    this._isAlarmSet = isAlarmSet;
     this._completedDays = completedDays;
+    this._missedDays = missedDays;
+    this._isCompletedToday = isCompletedToday;
     Habit.allHabits.push(this);
   }
 
@@ -47,35 +56,94 @@ export default class Habit {
     this._missedDays.push(value);
   }
 
+  get isCompletedToday() {
+    return this._isCompletedToday;
+  }
+
+  set isCompletedToday(value) {
+    this._isCompletedToday = value;
+  }
+
+  // Generate Habit calendar
+  generateCalendar(month, year, habit) {
+    const calendar = document.getElementById('calendar');
+    const calendarYear = document.getElementById('calendar-year');
+    const habitTitle = document.querySelector('.habit-title');
+    const habitCompletionBtn = document.querySelector('.habit-complete-btn');
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    calendar.innerHTML = ''; // Clear existing calendar
+
+    // fill in habit title
+    habitTitle.textContent = habit.name;
+
+    // // Get the first day of the month and the number of days in the month
+    // const firstDay = (new Date(year, month)).getDay();
+    const daysInMonth = 32 - new Date(year, month, 32).getDate();
+
+    const yearEl = document.createElement('span');
+    yearEl.textContent = `${monthNames[this.currentMonth - 1]} ${this.currentDay}, ${year}`;
+    calendarYear.innerHTML = '';
+    calendarYear.appendChild(yearEl);
+
+    // // Create calendar cells for each day
+    for (let day = 1; day <= daysInMonth; day++) {
+      const cell = document.createElement('div');
+      cell.classList.add('day');
+
+      cell.textContent = day;
+
+      // Highlight current day, in the current month, in the current year
+      if (
+        day === this.currentDay &&
+        month === this.currentMonth &&
+        year === this.currentYear
+      ) {
+        cell.classList.add('current');
+      }
+
+      if (habit.completedDays.includes(day)) {
+        cell.classList.add('completed')
+      }
+
+      calendar.appendChild(cell);
+    }
+  }
+
 
   // Create habit element 
-  createHabitElement(name) {
+  createHabitElement() {
     const habitsSection = document.querySelector('#habits');
     const habitsList = document.querySelector('.habits-list');
     const habitItem = document.createElement('li');
     const habitLinkContainer = document.createElement('a');
     const habitBtn = document.createElement('button');
     habitBtn.classList.add('habit-complete-btn');
-    habitLinkContainer.classList.add('habit-name')
+    habitBtn.setAttribute('data-habit-name', this.name);
+    habitLinkContainer.classList.add('habit-link')
 
     habitBtn.textContent = `Complete`;
-    habitLinkContainer.textContent = name;
-    habitLinkContainer.href = "";
+    habitLinkContainer.textContent = this.name;
     habitItem.classList.add('habit');
-    
+
     habitItem.appendChild(habitLinkContainer);
-    habitItem.appendChild(habitBtn); 
+    habitItem.appendChild(habitBtn);
     habitsList.append(habitItem);
     habitsSection.appendChild(habitsList);
-
   }
 
   handleHabitCompletion() {
-    if (!this.completedDays.includes(this.currentDay)) {
-      console.log(this)
-      this.completedDays = this.currentDay;
-      this.saveToLocalStorage();
+    if (this.completedDays.includes(this.currentDay)) {
+      return; // Do nothing if the habit is already completed
     }
+    if (this.isCompletedToday) this.isCompletedToday = false;
+    this.isCompletedToday = true;
+    this.completedDays = this.currentDay;
+    this.saveToLocalStorage();
+    this.generateCalendar(this.currentMonth, this.currentYear, this);
   }
 
   saveToLocalStorage() {
@@ -85,6 +153,8 @@ export default class Habit {
       name: this.name,
       description: this.description,
       todaysDate: this.currentDay,
+      isCompletedToday: this.isCompletedToday,
+      isAlarmSet: this._isAlarmSet
     };
     localStorage.setItem(`habit-${this.name}`, JSON.stringify(data));
   }
@@ -100,6 +170,13 @@ export default class Habit {
     }
 
     // Transform localStorage habits into Habit instances
-    return habits.map((habit) => new Habit(habit.name, habit.description, false, habit.completedDays));
+    return habits.map((habit) => new Habit(
+      habit.name,
+      habit.description,
+      habit.isCompletedToday,
+      habit.isAlarmSet,
+      habit.completedDays,
+      habit.missedDays
+    ));
   }
 }
