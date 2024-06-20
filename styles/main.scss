@@ -9,6 +9,7 @@
 
 html {
   background-color: $primary-black;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -19,6 +20,7 @@ body {
 }
 
 header {
+  background: $primary-black;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -50,6 +52,12 @@ h2,
 h3 {
   font-family: $heading-font;
   color: $primary-white;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -89,6 +97,7 @@ button {
   &.login {
     color: $primary-coral;
     cursor: default;
+
     a {
       cursor: pointer;
       color: $primary-white;

@@ -68,19 +68,12 @@ export default class Habit {
   generateCalendar(month, year, habit) {
     const calendar = document.getElementById('calendar');
     const calendarYear = document.getElementById('calendar-year');
-    const habitTitle = document.querySelector('.habit-title');
-    const habitCompletionBtn = document.querySelector('.habit-complete-btn');
     const monthNames = [
       "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
     ];
 
     calendar.innerHTML = ''; // Clear existing calendar
-
-    // fill in habit title
-    habitTitle.textContent = habit.name;
-
-    // // Get the first day of the month and the number of days in the month
     // const firstDay = (new Date(year, month)).getDay();
     const daysInMonth = 32 - new Date(year, month, 32).getDate();
 

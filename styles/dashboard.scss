@@ -2,7 +2,8 @@
 
 // Dashboard
 .dashboard-container {
-  padding: $space-2 $space-1;
+  padding: $space-1;
+  padding-bottom: 8rem;
   // margin-left: 5rem;
 }
 
@@ -13,16 +14,25 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: auto;
 
   #calendar-year {
     text-align: center;
     margin-bottom: $space-1;
+    color: $grey;
+    font-size: $heading-3;
+    font-family: $heading-font;
+    font-weight: bold;
+    border-bottom: 1px solid;
+    width: 100%;
+    padding: $space-1 0;
   }
 
   #calendar {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
-    grid-gap: $space-1;
+    gap: $space-1 / 2;
+    width: 100%;
 
     .day {
       padding: 10px;
@@ -32,17 +42,54 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 1.875rem;
-      width: 1.875rem;
+      height: 2.0625rem;
+      width: 2.0625rem;
+      font-size: $text-1;
 
       &.completed {
         background-color: $teal-100;
         box-shadow: 0 0 10px $teal-100;
+        border: none;
       }
     }
 
     .current {
-      border: solid 3px $teal-100;
+      border: solid 2px $primary-coral;
+    }
+  }
+}
+
+// Habits
+.habits {
+  .habits-list {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    overflow-x: hidden;
+    width: 100%;
+    scroll-snap-type: x mandatory;
+
+    .habit {
+      flex: 1 1 auto;
+      min-width: 40%;
+      border: solid 2px $charcoal;
+      border-radius: 15px;
+      height: 75%;
+      
+      &:has(.active) {
+        min-width: 50%;
+        scroll-snap-align: center;
+      }
+    }
+    
+    .habit-link {
+      aspect-ratio: 1/1;
+      display: block;
+
+      &.active {
+        aspect-ratio: 1/1;
+        color: $primary-teal;
+      }
     }
   }
 }
