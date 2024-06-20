@@ -13,12 +13,12 @@ function generateHabitList() {
   });
 
   const habitLinkBtns = document.querySelectorAll('.habit-link');
+  const habitItems = habitsList.querySelectorAll('.habit');
   const habitCompleteBtns = document.querySelectorAll('.habit-complete-btn');
   const lastHabitItem = habitsList.lastElementChild;
-  console.log(lastHabitItem);
 
-  if (habitLinkBtns.length > 0) {
-    habitLinkBtns[0].classList.add('active');
+  if (habitItems.length > 0) {
+    habitItems[0].classList.add('active');
     selectedHabitName = habitLinkBtns[0].textContent;
 
     habits.forEach((habit) => {
@@ -28,21 +28,24 @@ function generateHabitList() {
     });
 
     // Active status btns
-    habitLinkBtns.forEach((link, i) => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
+    habitItems.forEach((item, i) => {
+      item.addEventListener('click', (e) => {
         selectedHabitName = null;
-
-        habitLinkBtns.forEach((item) => item.classList.remove('active'));
-        link.classList.add('active');
-
+        habitItems.forEach((habit) => habit.classList.remove('active'));
+        item.classList.add('active');
         // Scroll to the last item
         lastHabitItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        selectedHabitName = link.textContent;
+        selectedHabitName = habitLinkBtns[i].textContent;
 
         if (habits[i].name === selectedHabitName) {
           habits[i].generateCalendar(habits[i].currentMonth, habits[i].currentYear, habits[i]);
         }
+      })
+    })
+
+    habitLinkBtns.forEach((link, i) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
 
       });
     });

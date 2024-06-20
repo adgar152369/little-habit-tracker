@@ -117,10 +117,10 @@ export default class Habit {
     habitBtn.classList.add('habit-complete-btn');
     habitBtn.setAttribute('data-habit-name', this.name);
     habitLinkContainer.classList.add('habit-link')
+    habitItem.classList.add('habit');
 
     habitBtn.textContent = `Complete`;
     habitLinkContainer.textContent = this.name;
-    habitItem.classList.add('habit');
 
     habitItem.appendChild(habitLinkContainer);
     habitItem.appendChild(habitBtn);

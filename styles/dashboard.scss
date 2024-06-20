@@ -31,7 +31,7 @@
   #calendar {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
-    gap: $space-1 / 2;
+    gap: calc($space-1 / 2);
     width: 100%;
 
     .day {
@@ -62,34 +62,38 @@
 // Habits
 .habits {
   .habits-list {
+    padding-bottom: $space-2;
     display: flex;
     align-items: center;
     gap: $space-2;
     overflow-x: hidden;
     width: 100%;
     scroll-snap-type: x mandatory;
-
+    
     .habit {
+      position: relative;
       flex: 1 1 auto;
       min-width: 40%;
       border: solid 2px $charcoal;
       border-radius: 15px;
       height: 75%;
+      aspect-ratio: 1/1;
+      font-size: $text-1;
+      font-weight: bold;
       
-      &:has(.active) {
+      &.active {
         min-width: 50%;
         scroll-snap-align: center;
+        font-size: $text-2;
+        color: $primary-teal;
       }
     }
     
     .habit-link {
-      aspect-ratio: 1/1;
       display: block;
+      position: absolute;
+      bottom: -1.5625rem;
 
-      &.active {
-        aspect-ratio: 1/1;
-        color: $primary-teal;
-      }
     }
   }
 }

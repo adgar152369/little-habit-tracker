@@ -81,6 +81,7 @@ form textarea {
 }
 
 .habits .habits-list {
+  padding-bottom: 1.5rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -89,23 +90,26 @@ form textarea {
   scroll-snap-type: x mandatory;
 }
 .habits .habits-list .habit {
+  position: relative;
   flex: 1 1 auto;
   min-width: 40%;
   border: solid 2px #36454F;
   border-radius: 15px;
   height: 75%;
+  aspect-ratio: 1/1;
+  font-size: 0.75rem;
+  font-weight: bold;
 }
-.habits .habits-list .habit:has(.active) {
+.habits .habits-list .habit.active {
   min-width: 50%;
   scroll-snap-align: center;
+  font-size: 1rem;
+  color: #008080;
 }
 .habits .habits-list .habit-link {
-  aspect-ratio: 1/1;
   display: block;
-}
-.habits .habits-list .habit-link.active {
-  aspect-ratio: 1/1;
-  color: #008080;
+  position: absolute;
+  bottom: -1.5625rem;
 }
 
 * {
