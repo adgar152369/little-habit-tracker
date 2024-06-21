@@ -35,6 +35,10 @@ export default class Habit {
     return this._description;
   }
 
+  set description(newDescription) {
+    this._description = newDescription.trim();
+  }
+
   get completedDays() {
     return this._completedDays;
   }
@@ -87,7 +91,7 @@ export default class Habit {
       const cell = document.createElement('div');
       cell.classList.add('day');
 
-      // cell.textContent = day;
+      cell.textContent = day;
 
       // Highlight current day, in the current month, in the current year
       if (
@@ -112,17 +116,18 @@ export default class Habit {
     const habitsSection = document.querySelector('#habits');
     const habitsList = document.querySelector('.habits-list');
     const habitItem = document.createElement('li');
-    const habitLinkContainer = document.createElement('a');
+    const habitLink = document.createElement('a');
     const habitBtn = document.createElement('button');
     habitBtn.classList.add('habit-complete-btn');
     habitItem.setAttribute('data-habit-name', this.name);
-    habitLinkContainer.classList.add('habit-link')
+    habitLink.classList.add('habit-link');
+    // habitLink.href = '/pages/edit.html';
     habitItem.classList.add('habit');
 
     habitBtn.textContent = `C`;
-    habitLinkContainer.textContent = this.name;
+    habitLink.textContent = this.name;
 
-    habitItem.appendChild(habitLinkContainer);
+    habitItem.appendChild(habitLink);
     habitItem.appendChild(habitBtn);
     habitsList.append(habitItem);
     habitsSection.appendChild(habitsList);
@@ -139,6 +144,67 @@ export default class Habit {
     this.generateCalendar(this.currentMonth, this.currentYear, this);
   }
 
+  editHabit() {
+    // Create the dialog element
+    const modal = document.createElement('dialog');
+    modal.classList.add('edit-modal');
+
+    // Modal content
+    modal.innerHTML = `
+      <form method="dialog"> 
+        <div class="modal-content">
+          <h2>Edit Habit: ${this.name}</h2>
+          <input type="text" id="edit-name" value="${this.name}" placeholder="Habit name">
+          <textarea id="edit-description" placeholder="Habit description">${this.description}</textarea>
+          <button class="" id="save-changes" value="save">Save Changes</button>
+          <button class="basic-btn" id="cancel-edit" value="cancel">Cancel</button>
+        </div>
+      </form>
+    `;
+    document.body.appendChild(modal);
+
+    // Event listeners for modal buttons
+    const saveButton = document.getElementById('save-changes');
+    const cancelButton = document.getElementById('cancel-edit');
+    const nameInput = document.getElementById('edit-name');
+    const descriptionInput = document.getElementById('edit-description');
+
+    saveButton.addEventListener('click', () => {
+      // const habitToEdit = this.loadHabitFromLocalStorage(this.name);
+
+      // Get updated name and description
+      const newName = nameInput.value.trim();
+      const newDescription = descriptionInput.value.trim();
+
+      if (newName !== this.name) {
+        localStorage.removeItem(`habit-${this.name}`);
+        this.name = newName;
+
+        // Remove from allHabits Array
+        const oldHabitIndex = Habit.allHabits.findIndex(h => h.name === this.name);
+        if (oldHabitIndex !== -1) { // if match is found
+          Habit.allHabits.splice(oldHabitIndex, 1);
+        }
+        this.description = newDescription;
+        this.saveToLocalStorage();
+
+        //Update allHabits Array
+        Habit.allHabits.push(this);
+
+        // refresh the page to update content
+        location.reload();
+      }
+
+      modal.close('save');
+    });
+
+    cancelButton.addEventListener('click', () => {
+      modal.close('cancel');
+    });
+
+    modal.showModal();
+  }
+
   saveToLocalStorage() {
     const data = {
       completedDays: this.completedDays,
@@ -152,10 +218,28 @@ export default class Habit {
     localStorage.setItem(`habit-${this.name}`, JSON.stringify(data));
   }
 
+  loadHabitFromLocalStorage(habitName) {
+    const storedHabit = localStorage.getItem(`habit-${habitName}`);
+    if (storedHabit) {
+      const data = JSON.parse(storedHabit);
+      const habit = new Habit(
+        data.name,
+        data.description,
+        data.isCompletedToday,
+        data.isAlarmSet,
+        data.completedDays,
+        data.missedDays
+      )
+      return habit;
+    }
+    else {
+      return null;
+    }
+  }
+
   static loadAllFromLocalStorage() {
     const keys = Object.keys(localStorage);
     const habits = [];
-    let isHabitCompleted = false;
 
     for (const key of keys) {
       const habit = JSON.parse(localStorage.getItem(key));

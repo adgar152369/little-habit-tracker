@@ -3,6 +3,7 @@ h1 {
 }
 
 form {
+  margin: auto;
   padding: 1.5rem 1rem;
 }
 form input,
@@ -29,8 +30,25 @@ form textarea {
   color: #36454F;
 }
 
+@media (min-width: 1024px) {
+  form {
+    max-width: 45%;
+  }
+}
 .dashboard-container {
   padding: 1rem;
+}
+@media (min-width: 768px) {
+  .dashboard-container {
+    padding: 1.5rem 3rem;
+  }
+}
+@media (min-width: 1024px) {
+  .dashboard-container {
+    max-width: 90%;
+    margin-left: auto;
+    padding-bottom: 0;
+  }
 }
 
 .calendar-container {
@@ -48,7 +66,6 @@ form textarea {
   font-size: 1.5rem;
   font-family: "JetBrains Mono", monospace;
   font-weight: bold;
-  border-bottom: 1px solid;
   width: 100%;
   padding: 1rem 0;
 }
@@ -61,7 +78,7 @@ form textarea {
 }
 .calendar-container #calendar .day {
   padding: 10px;
-  border: 1px solid #36454F;
+  background-color: #36454F;
   text-align: center;
   border-radius: 50%;
   display: flex;
@@ -79,8 +96,20 @@ form textarea {
 .calendar-container #calendar .current {
   border: solid 2px #F88379;
 }
+@media (min-width: 1024px) {
+  .calendar-container {
+    margin: 0;
+    padding-inline: 2rem;
+    width: min(100%, 480px);
+  }
+  .calendar-container #calendar .day {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+}
 
 .habits .habits-list {
+  min-height: 350px;
   padding-bottom: 3.5rem;
   display: flex;
   align-items: center;
@@ -91,9 +120,8 @@ form textarea {
 }
 .habits .habits-list .habit {
   position: relative;
-  flex: 1;
-  aspect-ratio: 1/1;
-  min-width: 50%;
+  min-width: 150px;
+  height: 150px;
   border: solid 2px #36454F;
   border-radius: 20px;
   font-size: 0.75rem;
@@ -103,20 +131,28 @@ form textarea {
   align-items: flex-end;
   padding: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.23s ease-in-out;
 }
 .habits .habits-list .habit.active {
-  min-width: 75%;
+  min-width: 175px;
+  height: 175px;
   scroll-snap-align: center;
   font-size: 1rem;
   color: #008080;
 }
+.habits .habits-list .habit.active .habit-link {
+  color: #F0FAFA;
+}
+.habits .habits-list--title {
+  margin-bottom: -2rem;
+}
 .habits .habits-list .habit-link {
   display: block;
   position: absolute;
-  bottom: -2rem;
+  bottom: -3rem;
   width: 100%;
   left: 0;
+  color: #8B8B8B;
 }
 .habits .habits-list .habit-complete-btn {
   background: none;
@@ -125,6 +161,31 @@ form textarea {
   max-width: 24px;
   max-width: 24px;
   aspect-ratio: 1/1;
+}
+@media (min-width: 768px) {
+  .habits {
+    padding-inline: 2rem;
+  }
+  .habits .habits-list {
+    min-height: 375px;
+  }
+}
+@media (min-width: 1024px) {
+  .habits .habits-list .habit {
+    min-width: 175px;
+    height: 175px;
+  }
+  .habits .habits-list .habit.active {
+    min-width: 250px;
+    height: 250px;
+  }
+  .habits .habits-list--title {
+    margin-bottom: 0;
+  }
+}
+
+.edit-modal {
+  background-color: #111111;
 }
 
 * {
@@ -143,7 +204,7 @@ body {
 }
 
 header {
-  background: #111111;
+  background-color: #111111;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -153,19 +214,32 @@ header {
   align-items: center;
   padding: 1.5rem 1rem;
   border-top: solid 1px #36454F;
+  z-index: 10;
 }
-
-.nav-list {
+header .nav-list {
   margin: 0;
   padding: 0;
   display: flex;
   gap: 4rem;
   list-style: none;
 }
-.nav-list a {
+header .nav-list a {
   color: #36454F;
   font-size: 0.75rem;
   font-weight: bold;
+}
+@media (min-width: 1024px) {
+  header {
+    padding: 0;
+    height: 100%;
+    right: unset;
+    width: 100px;
+    border-right: solid 1px #36454F;
+  }
+  header .nav-list {
+    flex-direction: column;
+    border: none;
+  }
 }
 
 h1,

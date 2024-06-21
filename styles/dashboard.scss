@@ -5,6 +5,16 @@
   padding: $space-1;
   // padding-bottom: 8rem;
   // margin-left: 5rem;
+
+  @media (min-width: 768px) {
+    padding: $space-2 $space-5;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 90%;
+    margin-left: auto;
+    padding-bottom: 0;
+  }
 }
 
 // Calendar
@@ -23,7 +33,7 @@
     font-size: $heading-3;
     font-family: $heading-font;
     font-weight: bold;
-    border-bottom: 1px solid;
+    // border-bottom: 1px solid;
     width: 100%;
     padding: $space-1 0;
   }
@@ -37,7 +47,8 @@
 
     .day {
       padding: 10px;
-      border: 1px solid $charcoal;
+      // border: 1px solid $charcoal;
+      background-color: $charcoal;
       text-align: center;
       border-radius: 50%;
       display: flex;
@@ -58,27 +69,38 @@
       border: solid 2px $primary-coral;
     }
   }
+
+  @media (min-width: 1024px) {
+    margin: 0;
+    padding-inline: $space-3;
+    width: min(100%, 480px);
+
+    #calendar {
+      .day {
+        height: 2.5rem;
+        width: 2.5rem;
+      }
+    }
+  }
 }
 
 // Habits
 .habits {
-  // margin-block: $space-2;
 
   .habits-list {
+    min-height: 350px;
     padding-bottom: 3.5rem;
     display: flex;
     align-items: center;
     gap: $space-2;
     overflow-x: hidden;
     width: 100%;
-    // scroll-snap-type: x;
     scroll-behavior: smooth;
 
     .habit {
       position: relative;
-      flex: 1;
-      aspect-ratio: 1/1;
-      min-width: 50%;
+      min-width: 150px;
+      height: 150px;
       border: solid 2px $charcoal;
       border-radius: 20px;
       font-size: $text-1;
@@ -88,22 +110,32 @@
       align-items: flex-end;
       padding: 1rem;
       cursor: pointer;
-      transition: all 0.3s ease-in-out;
+      transition: all 0.23s ease-in-out;
 
       &.active {
-        min-width: 75%;
+        min-width: 175px;
+        height: 175px;
         scroll-snap-align: center;
         font-size: $text-2;
         color: $primary-teal;
+
+        .habit-link {
+          color: $primary-white;
+        }
       }
+    }
+
+    &--title {
+      margin-bottom: -2rem;
     }
 
     .habit-link {
       display: block;
       position: absolute;
-      bottom: -2rem;
+      bottom: -3rem;
       width: 100%;
       left: 0;
+      color: $grey;
     }
 
     .habit-complete-btn {
@@ -115,4 +147,47 @@
       aspect-ratio: 1/1;
     }
   }
+
+  @media (min-width: 768px) {
+    padding-inline: $space-3;
+
+    .habits-list {
+      min-height: 375px;
+      // justify-content: center;
+
+      // .habit {
+      //   min-width: 300px;
+      //   height: 300px;
+      // }
+
+      // &.active {
+      //   min-width: 330px;
+      //   height: 330px;
+      // }
+
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .habits-list {
+      .habit {
+        min-width: 175px;
+        height: 175px;
+
+        &.active {
+          min-width: 250px;
+          height: 250px;
+        }
+      }
+      &--title {
+        margin-bottom: 0;
+      }
+    }
+
+  }
+}
+
+// Edit modal
+.edit-modal {
+  background-color: $primary-black;
 }

@@ -1,9 +1,9 @@
 import Habit from "./Habit.js";
 
-const habitsList = document.querySelector('.habits-list');
 
 // Get habits
-const habits = Habit.loadAllFromLocalStorage();
+let habits = Habit.loadAllFromLocalStorage();
+const habitsList = document.querySelector('.habits-list');
 let selectedHabitName = null;
 
 
@@ -15,7 +15,6 @@ function generateHabitList() {
   const habitLinkBtns = document.querySelectorAll('.habit-link');
   const habitItems = habitsList.querySelectorAll('.habit');
   const habitCompleteBtns = document.querySelectorAll('.habit-complete-btn');
-  const lastHabitItem = habitsList.lastElementChild;
 
   if (habitItems.length > 0) {
     habitItems[0].classList.add('active');
@@ -47,20 +46,18 @@ function generateHabitList() {
           });
           selectedHabit.generateCalendar(selectedHabit.currentMonth, selectedHabit.currentYear, selectedHabit);
         }
-        // Scroll to the last item
-        // lastHabitItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        // selectedHabitName = habitLinkBtns[i].textContent;
-
-        // if (habits[i].name === selectedHabitName) {
-        //   habits[i].generateCalendar(habits[i].currentMonth, habits[i].currentYear, habits[i]);
-        // }
       });
     });
 
+    // Edit habit btns
     habitLinkBtns.forEach((link, i) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-
+        const selectedHabit = habits.find(h => h.name === link.textContent);
+        // console.log(selectedHabit);
+        if (selectedHabit) {
+          selectedHabit.editHabit();
+        }
       });
     });
 
@@ -68,7 +65,7 @@ function generateHabitList() {
     habitCompleteBtns.forEach((completeBtn, i) => {
       completeBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const habitName = completeBtn.getAttribute('data-habit-name');
+        const habitName = habitItems[i].getAttribute('data-habit-name');
 
         if (habitName === habits[i].name) {
           habits[i].handleHabitCompletion();

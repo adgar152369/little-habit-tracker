@@ -3,7 +3,8 @@ h1 {
 }
 
 form {
-  // max-width: 50%;
+  // max-width: 45%;
+  margin: auto;
   padding: $space-2 $space-1;
 
   input,
@@ -32,5 +33,11 @@ form {
     z-index: -1;
     font-size: $text-2;
     color: $charcoal;
+  }
+}
+
+@media (min-width: 1024px) {
+  form {
+    max-width: 45%;
   }
 }
