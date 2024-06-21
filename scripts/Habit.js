@@ -87,7 +87,7 @@ export default class Habit {
       const cell = document.createElement('div');
       cell.classList.add('day');
 
-      cell.textContent = day;
+      // cell.textContent = day;
 
       // Highlight current day, in the current month, in the current year
       if (
@@ -115,11 +115,11 @@ export default class Habit {
     const habitLinkContainer = document.createElement('a');
     const habitBtn = document.createElement('button');
     habitBtn.classList.add('habit-complete-btn');
-    habitBtn.setAttribute('data-habit-name', this.name);
+    habitItem.setAttribute('data-habit-name', this.name);
     habitLinkContainer.classList.add('habit-link')
     habitItem.classList.add('habit');
 
-    habitBtn.textContent = `Complete`;
+    habitBtn.textContent = `C`;
     habitLinkContainer.textContent = this.name;
 
     habitItem.appendChild(habitLinkContainer);

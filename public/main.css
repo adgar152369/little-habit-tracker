@@ -31,7 +31,6 @@ form textarea {
 
 .dashboard-container {
   padding: 1rem;
-  padding-bottom: 8rem;
 }
 
 .calendar-container {
@@ -56,7 +55,8 @@ form textarea {
 .calendar-container #calendar {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 0.5rem;
+  place-items: center;
+  gap: 1rem;
   width: 100%;
 }
 .calendar-container #calendar .day {
@@ -81,27 +81,32 @@ form textarea {
 }
 
 .habits .habits-list {
-  padding-bottom: 1.5rem;
+  padding-bottom: 3.5rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
   overflow-x: hidden;
   width: 100%;
-  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 }
 .habits .habits-list .habit {
   position: relative;
-  flex: 1 1 auto;
-  min-width: 40%;
-  border: solid 2px #36454F;
-  border-radius: 15px;
-  height: 75%;
+  flex: 1;
   aspect-ratio: 1/1;
+  min-width: 50%;
+  border: solid 2px #36454F;
+  border-radius: 20px;
   font-size: 0.75rem;
   font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 .habits .habits-list .habit.active {
-  min-width: 50%;
+  min-width: 75%;
   scroll-snap-align: center;
   font-size: 1rem;
   color: #008080;
@@ -109,7 +114,17 @@ form textarea {
 .habits .habits-list .habit-link {
   display: block;
   position: absolute;
-  bottom: -1.5625rem;
+  bottom: -2rem;
+  width: 100%;
+  left: 0;
+}
+.habits .habits-list .habit-complete-btn {
+  background: none;
+  border: solid 2px #36454F;
+  border-radius: 5px;
+  max-width: 24px;
+  max-width: 24px;
+  aspect-ratio: 1/1;
 }
 
 * {
@@ -158,6 +173,11 @@ h2,
 h3 {
   font-family: "JetBrains Mono", monospace;
   color: #F0FAFA;
+}
+
+.sub-header {
+  margin-top: 3rem;
+  color: #F88379;
 }
 
 ul {

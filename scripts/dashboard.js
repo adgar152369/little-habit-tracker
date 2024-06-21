@@ -31,17 +31,31 @@ function generateHabitList() {
     habitItems.forEach((item, i) => {
       item.addEventListener('click', (e) => {
         selectedHabitName = null;
+
         habitItems.forEach((habit) => habit.classList.remove('active'));
         item.classList.add('active');
-        // Scroll to the last item
-        lastHabitItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        selectedHabitName = habitLinkBtns[i].textContent;
 
-        if (habits[i].name === selectedHabitName) {
-          habits[i].generateCalendar(habits[i].currentMonth, habits[i].currentYear, habits[i]);
+        // Find the clicked habit
+        const habitName = item.querySelector('.habit-link').textContent;
+        const selectedHabit = habits.find(h => h.name === habitName);
+
+        if (selectedHabit) {
+          e.target.scrollIntoView({
+            behavior: 'smooth', // Use smooth scrolling
+            block: 'center',   // Center the element in the viewport (vertically and horizontally)
+            inline: 'center'   // Center the element in the viewport horizontally
+          });
+          selectedHabit.generateCalendar(selectedHabit.currentMonth, selectedHabit.currentYear, selectedHabit);
         }
-      })
-    })
+        // Scroll to the last item
+        // lastHabitItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // selectedHabitName = habitLinkBtns[i].textContent;
+
+        // if (habits[i].name === selectedHabitName) {
+        //   habits[i].generateCalendar(habits[i].currentMonth, habits[i].currentYear, habits[i]);
+        // }
+      });
+    });
 
     habitLinkBtns.forEach((link, i) => {
       link.addEventListener('click', (e) => {

@@ -3,7 +3,7 @@
 // Dashboard
 .dashboard-container {
   padding: $space-1;
-  padding-bottom: 8rem;
+  // padding-bottom: 8rem;
   // margin-left: 5rem;
 }
 
@@ -31,7 +31,8 @@
   #calendar {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
-    gap: calc($space-1 / 2);
+    place-items: center;
+    gap: $space-1;
     width: 100%;
 
     .day {
@@ -61,39 +62,57 @@
 
 // Habits
 .habits {
+  // margin-block: $space-2;
+
   .habits-list {
-    padding-bottom: $space-2;
+    padding-bottom: 3.5rem;
     display: flex;
     align-items: center;
     gap: $space-2;
     overflow-x: hidden;
     width: 100%;
-    scroll-snap-type: x mandatory;
-    
+    // scroll-snap-type: x;
+    scroll-behavior: smooth;
+
     .habit {
       position: relative;
-      flex: 1 1 auto;
-      min-width: 40%;
-      border: solid 2px $charcoal;
-      border-radius: 15px;
-      height: 75%;
+      flex: 1;
       aspect-ratio: 1/1;
+      min-width: 50%;
+      border: solid 2px $charcoal;
+      border-radius: 20px;
       font-size: $text-1;
       font-weight: bold;
-      
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
       &.active {
-        min-width: 50%;
+        min-width: 75%;
         scroll-snap-align: center;
         font-size: $text-2;
         color: $primary-teal;
       }
     }
-    
+
     .habit-link {
       display: block;
       position: absolute;
-      bottom: -1.5625rem;
+      bottom: -2rem;
+      width: 100%;
+      left: 0;
+    }
 
+    .habit-complete-btn {
+      background: none;
+      border: solid 2px $charcoal;
+      border-radius: 5px;
+      max-width: 24px;
+      max-width: 24px;
+      aspect-ratio: 1/1;
     }
   }
 }
