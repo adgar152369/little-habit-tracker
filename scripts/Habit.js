@@ -113,10 +113,15 @@ export default class Habit {
     const calendar = document.getElementById('calendar');
     const calendarYear = document.getElementById('calendar-year');
     const calendarContainer = document.querySelector('.calendar-container');
-    const creationDate = document.createElement('span');
-    creationDate.id = 'habitCreationDate';
-    creationDate.textContent = `Habit created: ${this.createdDate}`;
-    calendarContainer.appendChild(creationDate);
+    let creationDate = document.getElementById('habitCreationDate'); 
+    
+    if (!creationDate) {
+      creationDate = document.createElement('span');
+      creationDate.id = 'habitCreationDate';
+      creationDate.textContent = `Habit created: ${this.createdDate}`;
+      calendarContainer.appendChild(creationDate);
+    }
+
 
     const monthNames = [
       "January", "February", "March", "April", "May", "June",

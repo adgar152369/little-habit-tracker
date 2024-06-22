@@ -27,7 +27,7 @@
   #habitCreationDate {
     position: absolute;
     left: 0;
-    bottom: 0rem;
+    bottom: -2rem;
     // color: $primary-white;
     font-family: $heading-font;
     font-size: .75rem;
@@ -92,6 +92,7 @@
 
 // Habits
 .habits {
+  padding-bottom: 2rem;
 
   .habits-list {
     min-height: 350px;
@@ -132,7 +133,7 @@
     }
 
     &--title {
-      // margin-bottom: -2rem;
+      margin-bottom: -4rem;
     }
 
     .habit-link {

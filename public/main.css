@@ -62,7 +62,7 @@ form textarea {
 .calendar-container #habitCreationDate {
   position: absolute;
   left: 0;
-  bottom: 0rem;
+  bottom: -2rem;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.75rem;
 }
@@ -112,6 +112,9 @@ form textarea {
   }
 }
 
+.habits {
+  padding-bottom: 2rem;
+}
 .habits .habits-list {
   min-height: 350px;
   display: flex;
@@ -145,6 +148,9 @@ form textarea {
 }
 .habits .habits-list .habit.active .habit-link {
   color: #F0FAFA;
+}
+.habits .habits-list--title {
+  margin-bottom: -4rem;
 }
 .habits .habits-list .habit-link {
   display: block;
@@ -263,7 +269,7 @@ h3 {
 .sub-header {
   text-align: center;
   color: #F88379;
-  margin-block: 1rem;
+  margin-top: 1rem;
 }
 @media (min-width: 1024px) {
   .sub-header {
