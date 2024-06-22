@@ -16,6 +16,7 @@ export default class Habit {
     ) {
     const storedData = localStorage.getItem(`habit-${this.name}`);
     if (storedData) {
+      console.log(storedData);
       this._name = storedData.name;
       this._description = storedData.description;
       this._isAlarmSet = storedData.isAlarmSet;
@@ -25,6 +26,7 @@ export default class Habit {
       this.createdDate = new Date(storedData.createdDate).toLocaleDateString();
     }
     else {
+      // console.log(this);
       this._name = name;
       this._description = description;
       this._isAlarmSet = isAlarmSet;
@@ -213,13 +215,14 @@ export default class Habit {
     const descriptionInput = document.getElementById('edit-description');
 
     saveButton.addEventListener('click', () => {
+      console.log(this);
       // const habitToEdit = this.loadHabitFromLocalStorage(this.name);
 
       // Get updated name and description
       const newName = nameInput.value.trim();
       const newDescription = descriptionInput.value.trim();
 
-      if (newName !== this.name) {
+      if (newName !== this.name || newDescription !== this.description) {
         localStorage.removeItem(`habit-${this.name}`);
         this.name = newName;
 

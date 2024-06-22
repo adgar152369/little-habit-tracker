@@ -46,16 +46,14 @@ header {
       font-weight: bold;
     }
   }
-  @media (min-width: 768px) {
-
-  }
 
   @media (min-width: 1024px) {
     padding: 0;
-    height: 100%;
+    bottom: 50%;
+    // height: 50%;
     right: unset;
-    // position: absolute;
-    width: 100px;
+    width: 75px;
+    border-top: none;
     border-right: solid 1px $charcoal;
 
     .nav-list {
@@ -76,6 +74,11 @@ h3 {
 .sub-header {
   text-align: center;
   color: $primary-coral;
+  margin-block: 1rem;
+
+  @media (min-width: 1024px) {
+    text-align: left;
+  }
 }
 
 ul {
@@ -100,7 +103,7 @@ button {
 
   @media (min-width: 1024px) {
     flex-direction: row;
-    gap: $space-huge;
+    // gap: $space-huge;
   }
 }
 

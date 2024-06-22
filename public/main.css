@@ -62,7 +62,7 @@ form textarea {
 .calendar-container #habitCreationDate {
   position: absolute;
   left: 0;
-  bottom: -2rem;
+  bottom: 0rem;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.75rem;
 }
@@ -70,7 +70,7 @@ form textarea {
   text-align: center;
   margin-bottom: 1rem;
   color: #8B8B8B;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-family: "JetBrains Mono", monospace;
   font-weight: bold;
   width: 100%;
@@ -80,7 +80,6 @@ form textarea {
   grid-template-columns: repeat(7, minmax(0, 1fr));
   place-items: center;
   gap: 1rem;
-  width: 100%;
 }
 .calendar-container #calendar .day {
   padding: 10px;
@@ -105,7 +104,7 @@ form textarea {
 @media (min-width: 1024px) {
   .calendar-container {
     margin: 0;
-    width: min(100%, 480px);
+    width: min(100%, 385px);
   }
   .calendar-container #calendar .day {
     height: 2.75rem;
@@ -115,7 +114,6 @@ form textarea {
 
 .habits .habits-list {
   min-height: 350px;
-  padding-bottom: 3.5rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -148,9 +146,6 @@ form textarea {
 .habits .habits-list .habit.active .habit-link {
   color: #F0FAFA;
 }
-.habits .habits-list--title {
-  margin-bottom: -2rem;
-}
 .habits .habits-list .habit-link {
   display: block;
   position: absolute;
@@ -169,10 +164,7 @@ form textarea {
 }
 @media (min-width: 768px) {
   .habits {
-    margin-top: 5rem;
-  }
-  .habits .habits-list {
-    min-height: 375px;
+    margin-top: 3rem;
   }
 }
 @media (min-width: 1024px) {
@@ -190,11 +182,16 @@ form textarea {
 }
 
 .success-rate-container {
-  max-width: 300px;
+  max-width: 500px;
   margin: 1rem auto;
 }
 .success-rate-container .sub-header {
   margin-top: 0;
+}
+@media (min-width: 1024px) {
+  .success-rate-container {
+    max-width: none;
+  }
 }
 
 .edit-modal {
@@ -244,9 +241,10 @@ header .nav-list a {
 @media (min-width: 1024px) {
   header {
     padding: 0;
-    height: 100%;
+    bottom: 50%;
     right: unset;
-    width: 100px;
+    width: 75px;
+    border-top: none;
     border-right: solid 1px #36454F;
   }
   header .nav-list {
@@ -265,6 +263,12 @@ h3 {
 .sub-header {
   text-align: center;
   color: #F88379;
+  margin-block: 1rem;
+}
+@media (min-width: 1024px) {
+  .sub-header {
+    text-align: left;
+  }
 }
 
 ul {
@@ -289,7 +293,6 @@ button {
 @media (min-width: 1024px) {
   .flex-container {
     flex-direction: row;
-    gap: 10rem;
   }
 }
 

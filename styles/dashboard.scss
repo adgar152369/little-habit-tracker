@@ -27,7 +27,7 @@
   #habitCreationDate {
     position: absolute;
     left: 0;
-    bottom: -2rem;
+    bottom: 0rem;
     // color: $primary-white;
     font-family: $heading-font;
     font-size: .75rem;
@@ -37,7 +37,7 @@
     text-align: center;
     margin-bottom: $space-1;
     color: $grey;
-    font-size: $heading-3;
+    font-size: $text-4;
     font-family: $heading-font;
     font-weight: bold;
     width: 100%;
@@ -48,7 +48,7 @@
     grid-template-columns: repeat(7, minmax(0, 1fr));
     place-items: center;
     gap: $space-1;
-    width: 100%;
+    // width: 100%;
 
     .day {
       padding: 10px;
@@ -77,7 +77,7 @@
   @media (min-width: 1024px) {
     margin: 0;
     // padding-inline: $space-3;
-    width: min(100%, 480px);
+    width: min(100%, 385px);
 
     #calendar {
 
@@ -95,7 +95,7 @@
 
   .habits-list {
     min-height: 350px;
-    padding-bottom: 3.5rem;
+    // padding-bottom: 3.5rem;
     display: flex;
     align-items: center;
     gap: $space-2;
@@ -132,7 +132,7 @@
     }
 
     &--title {
-      margin-bottom: -2rem;
+      // margin-bottom: -2rem;
     }
 
     .habit-link {
@@ -156,10 +156,10 @@
 
   @media (min-width: 768px) {
     // padding-inline: $space-3;
-    margin-top: 5rem;
+    margin-top: 3rem;
 
     .habits-list {
-      min-height: 375px;
+      // min-height: 325px;
     }
   }
 
@@ -185,11 +185,15 @@
 
 // Success rate chart
 .success-rate-container {
-  max-width: 300px;
+  max-width: 500px;
   margin: 1rem auto;
 
   .sub-header {
     margin-top: 0;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: none;
   }
 }
 
