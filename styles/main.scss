@@ -2,8 +2,6 @@
 @import 'dashboard';
 
 * {
-  // margin: 0;
-  // padding: 0;
   box-sizing: border-box;
 }
 
@@ -15,7 +13,6 @@ html {
 body {
   color: $text-gray;
   font-family: $body-font;
-  // padding: $space-1 $space-2;
   margin: 0;
 }
 
@@ -36,7 +33,6 @@ header {
     margin: 0;
     padding: 0;
     display: flex;
-    // flex-direction: column;
     gap: 4rem;
     list-style: none;
   
@@ -50,7 +46,6 @@ header {
   @media (min-width: 1024px) {
     padding: 0;
     bottom: 50%;
-    // height: 50%;
     right: unset;
     width: 75px;
     border-top: none;
@@ -103,7 +98,6 @@ button {
 
   @media (min-width: 1024px) {
     flex-direction: row;
-    // gap: $space-huge;
   }
 }
 

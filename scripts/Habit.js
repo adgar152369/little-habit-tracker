@@ -129,7 +129,6 @@ export default class Habit {
     ];
 
     calendar.innerHTML = ''; // Clear existing calendar
-    // const firstDay = (new Date(year, month)).getDay();
     const daysInMonth = 32 - new Date(year, month, 32).getDate();
 
     const yearEl = document.createElement('span');
@@ -137,7 +136,7 @@ export default class Habit {
     calendarYear.innerHTML = '';
     calendarYear.appendChild(yearEl);
 
-    // // Create calendar cells for each day
+    // Create calendar cells for each day
     for (let day = 1; day <= daysInMonth; day++) {
       const cell = document.createElement('div');
       cell.classList.add('day');
