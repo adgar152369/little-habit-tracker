@@ -1,7 +1,9 @@
 export default class Habit {
-  currentDay = new Date().getDate();
+  currentDay = new Date().getDate()+2;
   currentMonth = new Date().getMonth() + 1;
   currentYear = new Date().getFullYear();
+  createdDate = new Date().getDate();
+
   static allHabits = [];
 
   constructor
@@ -13,13 +15,27 @@ export default class Habit {
       completedDays = [],
       missedDays = []
     ) {
-    this._name = name;
-    this._description = description;
-    this._isAlarmSet = isAlarmSet;
-    this._completedDays = completedDays;
-    this._missedDays = missedDays;
-    this._isCompletedToday = isCompletedToday;
-    Habit.allHabits.push(this);
+    const storedData = localStorage.getItem(`habit-${this.name}`);
+    if (storedData) {
+      this._name = storedData.name;
+      this._description = storedData.description;
+      this._isAlarmSet = storedData.isAlarmSet;
+      this._completedDays = storedData.completedDays || [];
+      this._missedDays = storedData.missedDays || [];
+      this._isCompletedToday = storedData.isCompletedToday || false;
+      this.createdDate = new Date(storedData.createdDate).toLocaleDateString();
+    }
+    else {
+      this._name = name;
+      this._description = description;
+      this._isAlarmSet = isAlarmSet;
+      this._completedDays = completedDays;
+      this._missedDays = missedDays;
+      this._isCompletedToday = isCompletedToday;
+      this.createdDate = new Date().toLocaleDateString();
+      Habit.allHabits.push(this);
+    }
+
   }
 
   // Getters and Setters
@@ -29,6 +45,14 @@ export default class Habit {
 
   set name(name) {
     this._name = name;
+  }
+
+  set createdDate(value) {
+    this._createdDate = value;
+  }
+
+  get createdDate() {
+    return this._createdDate;
   }
 
   get description() {
@@ -56,8 +80,13 @@ export default class Habit {
     return this._missedDays;
   }
 
-  set missedDays(value) {
-    this._missedDays.push(value);
+  set missedDays(date) {
+    if (!Array.isArray(date)) {
+      this._missedDays.push(date);
+    }
+    else {
+      date.forEach(d => this._missedDays.push(d));
+    }
   }
 
   get isCompletedToday() {
@@ -66,6 +95,16 @@ export default class Habit {
 
   set isCompletedToday(value) {
     this._isCompletedToday = value;
+  }
+
+  getMissedDaysForMonth() {
+    const daysInMonth = 32 - new Date(this.currentYear, this.currentMonth, 32).getDate();
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(this.currentYear, this.currentMonth, day);
+
+      console.log(date);
+    }
   }
 
   // Generate Habit calendar
@@ -121,7 +160,6 @@ export default class Habit {
     habitBtn.classList.add('habit-complete-btn');
     habitItem.setAttribute('data-habit-name', this.name);
     habitLink.classList.add('habit-link');
-    // habitLink.href = '/pages/edit.html';
     habitItem.classList.add('habit');
 
     habitBtn.textContent = `C`;
@@ -207,6 +245,7 @@ export default class Habit {
 
   saveToLocalStorage() {
     const data = {
+      createdDate: this.createdDate,
       completedDays: this.completedDays,
       missedDays: this.missedDays,
       name: this.name,

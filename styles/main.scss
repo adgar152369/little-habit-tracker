@@ -74,7 +74,7 @@ h3 {
 }
 
 .sub-header {
-  margin-top: 3rem;
+  // margin-top: 3rem;
   color: $primary-coral;
 }
 
@@ -90,6 +90,18 @@ a {
 
 button {
   cursor: pointer;
+}
+
+// utility classes
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    gap: $space-huge;
+  }
 }
 
 // buttons

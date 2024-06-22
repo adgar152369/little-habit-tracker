@@ -11,6 +11,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="module" src="/scripts/dashboard.js" defer></script>
+  <script type="module" src="/scripts/successChart.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Dashboard</title>
 </head>
 
@@ -26,9 +28,17 @@
   </header>
   <div class="dashboard-container">
     <!-- <h1 class="habit-title">Dashboard</h1> -->
-    <div class="calendar-container">
-      <div id="calendar-year"></div>
-      <div id="calendar"></div>
+    <div class="flex-container">
+      <div class="calendar-container">
+        <div id="calendar-year"></div>
+        <div id="calendar"></div>
+      </div>
+      <div class="success-rate-container">
+        <h2 class="sub-header">Success</h2>
+        <div>
+          <canvas id="successChart"></canvas>
+        </div>
+      </div>
     </div>
 
     <section class="habits" id="habits">
@@ -37,7 +47,7 @@
     </section>
   </div>
 
-  
+
 </body>
 
 </html>

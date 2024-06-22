@@ -1,4 +1,5 @@
 import Habit from "./Habit.js";
+import generateSuccessChart from "./successChart.js";
 
 
 // Get habits
@@ -16,13 +17,15 @@ function generateHabitList() {
   const habitItems = habitsList.querySelectorAll('.habit');
   const habitCompleteBtns = document.querySelectorAll('.habit-complete-btn');
 
+  // give first habit loaded the active class
   if (habitItems.length > 0) {
     habitItems[0].classList.add('active');
     selectedHabitName = habitLinkBtns[0].textContent;
 
     habits.forEach((habit) => {
       if (habit.name === selectedHabitName) {
-        habit.generateCalendar(habit.currentMonth, habit.currentYear, habit)
+        habit.generateCalendar(habit.currentMonth, habit.currentYear, habit);
+        generateSuccessChart(habit);
       }
     });
 
@@ -45,6 +48,7 @@ function generateHabitList() {
             inline: 'center'   // Center the element in the viewport horizontally
           });
           selectedHabit.generateCalendar(selectedHabit.currentMonth, selectedHabit.currentYear, selectedHabit);
+          generateSuccessChart(selectedHabit);
         }
       });
     });
@@ -53,8 +57,8 @@ function generateHabitList() {
     habitLinkBtns.forEach((link, i) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
+        
         const selectedHabit = habits.find(h => h.name === link.textContent);
-        // console.log(selectedHabit);
         if (selectedHabit) {
           selectedHabit.editHabit();
         }
@@ -109,4 +113,6 @@ function createIntersectionObserver(links) {
   links.forEach((link) => observer.observe(link))
 }
 
-generateHabitList();
+if (habits.length > 0) {
+  generateHabitList();
+}
