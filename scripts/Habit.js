@@ -1,8 +1,7 @@
 export default class Habit {
-  currentDay = new Date().getDate()+2;
+  currentDay = new Date().getDate();
   currentMonth = new Date().getMonth() + 1;
   currentYear = new Date().getFullYear();
-  createdDate = new Date().getDate();
 
   static allHabits = [];
 
@@ -111,6 +110,12 @@ export default class Habit {
   generateCalendar(month, year, habit) {
     const calendar = document.getElementById('calendar');
     const calendarYear = document.getElementById('calendar-year');
+    const calendarContainer = document.querySelector('.calendar-container');
+    const creationDate = document.createElement('span');
+    creationDate.id = 'habitCreationDate';
+    creationDate.textContent = `Habit created: ${this.createdDate}`;
+    calendarContainer.appendChild(creationDate);
+
     const monthNames = [
       "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"

@@ -10,9 +10,9 @@ export default function generateSuccessChart(habit) {
   const selectedHabit = habit;
   const completedDays = selectedHabit.completedDays.length; // Get the number of completed days
   const creationDay = new Date(selectedHabit.createdDate).getDate();
-  const numDaysOfHabit = selectedHabit.currentDay - creationDay;
-  const daysSinceCreation = [];
 
+  // const numDaysOfHabit = selectedHabit.currentDay - creationDay;
+  const daysSinceCreation = [];
   for (let i = creationDay; i <= selectedHabit.currentDay; i++) {
     daysSinceCreation.push(i);
   }
@@ -25,7 +25,6 @@ export default function generateSuccessChart(habit) {
   });
 
   selectedHabit.missedDays = missedDays;
-  console.log(selectedHabit);
 
   const chartData = {
     labels: ['Completed', 'Missed'],
@@ -89,6 +88,6 @@ export default function generateSuccessChart(habit) {
 
 function isSameDay(date1, date2) {
   return (
-    date1 === date2.getDate()+2
+    date1 === date2.getDate()
   );
 }

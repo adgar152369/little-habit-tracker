@@ -57,6 +57,14 @@ form textarea {
   flex-direction: column;
   align-items: center;
   margin: auto;
+  position: relative;
+}
+.calendar-container #habitCreationDate {
+  position: absolute;
+  left: 0;
+  bottom: -2rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
 }
 .calendar-container #calendar-year {
   text-align: center;
@@ -97,12 +105,11 @@ form textarea {
 @media (min-width: 1024px) {
   .calendar-container {
     margin: 0;
-    padding-inline: 2rem;
     width: min(100%, 480px);
   }
   .calendar-container #calendar .day {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 2.75rem;
+    width: 2.75rem;
   }
 }
 
@@ -162,7 +169,7 @@ form textarea {
 }
 @media (min-width: 768px) {
   .habits {
-    padding-inline: 2rem;
+    margin-top: 5rem;
   }
   .habits .habits-list {
     min-height: 375px;
@@ -182,6 +189,10 @@ form textarea {
   }
 }
 
+.success-rate-container {
+  max-width: 300px;
+  margin: 1rem auto;
+}
 .success-rate-container .sub-header {
   margin-top: 0;
 }
@@ -252,6 +263,7 @@ h3 {
 }
 
 .sub-header {
+  text-align: center;
   color: #F88379;
 }
 

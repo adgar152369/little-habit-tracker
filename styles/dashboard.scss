@@ -22,6 +22,16 @@
   flex-direction: column;
   align-items: center;
   margin: auto;
+  position: relative;
+
+  #habitCreationDate {
+    position: absolute;
+    left: 0;
+    bottom: -2rem;
+    // color: $primary-white;
+    font-family: $heading-font;
+    font-size: .75rem;
+  }
 
   #calendar-year {
     text-align: center;
@@ -66,13 +76,15 @@
 
   @media (min-width: 1024px) {
     margin: 0;
-    padding-inline: $space-3;
+    // padding-inline: $space-3;
     width: min(100%, 480px);
 
     #calendar {
+
+      // gap: .25rem;
       .day {
-        height: 2.5rem;
-        width: 2.5rem;
+        height: 2.75rem;
+        width: 2.75rem;
       }
     }
   }
@@ -143,7 +155,8 @@
   }
 
   @media (min-width: 768px) {
-    padding-inline: $space-3;
+    // padding-inline: $space-3;
+    margin-top: 5rem;
 
     .habits-list {
       min-height: 375px;
@@ -161,6 +174,7 @@
           height: 250px;
         }
       }
+
       &--title {
         margin-bottom: 0;
       }
@@ -171,6 +185,9 @@
 
 // Success rate chart
 .success-rate-container {
+  max-width: 300px;
+  margin: 1rem auto;
+
   .sub-header {
     margin-top: 0;
   }
