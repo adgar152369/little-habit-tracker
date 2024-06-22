@@ -17,6 +17,7 @@ function generateHabitList() {
   const habitItems = habitsList.querySelectorAll('.habit');
   const habitCompleteBtns = document.querySelectorAll('.habit-complete-btn');
 
+
   // give first habit loaded the active class
   if (habitItems.length > 0) {
     habitItems[0].classList.add('active');

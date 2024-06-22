@@ -113,15 +113,14 @@ export default class Habit {
     const calendar = document.getElementById('calendar');
     const calendarYear = document.getElementById('calendar-year');
     const calendarContainer = document.querySelector('.calendar-container');
-    let creationDate = document.getElementById('habitCreationDate'); 
-    
+    let creationDate = document.getElementById('habitCreationDate');
+
     if (!creationDate) {
       creationDate = document.createElement('span');
       creationDate.id = 'habitCreationDate';
       creationDate.textContent = `Habit created: ${this.createdDate}`;
       calendarContainer.appendChild(creationDate);
     }
-
 
     const monthNames = [
       "January", "February", "March", "April", "May", "June",
@@ -160,6 +159,10 @@ export default class Habit {
     }
   }
 
+  // Delete habit
+  deleteHabit() {
+
+  }
 
   // Create habit element 
   createHabitElement() {
@@ -207,16 +210,18 @@ export default class Habit {
           <textarea id="edit-description" placeholder="Habit description">${this.description}</textarea>
           <button class="" id="save-changes" value="save">Save Changes</button>
           <button class="basic-btn" id="cancel-edit" value="cancel">Cancel</button>
+          <button class="basic-btn" id="delete-habit" value="Delete">Delete</button>
         </div>
       </form>
     `;
     document.body.appendChild(modal);
 
     // Event listeners for modal buttons
-    const saveButton = document.getElementById('save-changes');
-    const cancelButton = document.getElementById('cancel-edit');
-    const nameInput = document.getElementById('edit-name');
-    const descriptionInput = document.getElementById('edit-description');
+    const saveButton = document.querySelector('#save-changes');
+    const cancelButton = document.querySelector('#cancel-edit');
+    const nameInput = document.querySelector('#edit-name');
+    const descriptionInput = document.querySelector('#edit-description');
+    const deleteButton = document.querySelector('#delete-habit');
 
     saveButton.addEventListener('click', () => {
       console.log(this);
@@ -251,6 +256,23 @@ export default class Habit {
     cancelButton.addEventListener('click', () => {
       modal.close('cancel');
     });
+
+    deleteButton.addEventListener('click', () => {
+      if (confirm("Do you really want to delete this habit? ")) {
+        // delete habit from allHabits list
+        const habitToDelete = Habit.allHabits.find(habit => this.name === habit.name);
+        if (habitToDelete) {
+          console.log(habitToDelete.name)
+          const indexToDelete = Habit.allHabits.indexOf(habitToDelete);
+          Habit.allHabits.splice(indexToDelete, 1);
+          // delete from localStorage
+          localStorage.removeItem(`habit-${habitToDelete.name}`);
+          
+        }
+        location.reload();
+        modal.close();
+      }
+    })
 
     modal.showModal();
   }
